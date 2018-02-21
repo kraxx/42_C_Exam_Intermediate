@@ -1,7 +1,7 @@
 typedef struct s_node {
   int value;
   struct s_node **nodes;
-} node;
+} Node;
 
 int height_tree(struct s_node *root) {
 
@@ -20,8 +20,8 @@ int height_tree(struct s_node *root) {
 
 #include <stdlib.h>
 #include <stdio.h>
-node* b(int v) {
-  node* new = malloc(sizeof(node));
+Node* b(int v) {
+  Node* new = malloc(sizeof(node));
   new->value = v;
   new->nodes = malloc(100000);
   return new;
@@ -29,7 +29,7 @@ node* b(int v) {
 
 int main() {
 
-  node* r = b(94);
+  Node* r = b(94);
   r->nodes[0] = b(34);
   r->nodes[1] = b(52);
 

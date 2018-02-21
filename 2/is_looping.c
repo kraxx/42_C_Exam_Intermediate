@@ -3,22 +3,48 @@ typedef struct s_node {
 	struct s_node *next;
 } Node;
 
-int is_looping(struct s_node *node) {
+int is_looping(Node* node) {
 	Node* n1 = node;
 	Node* n2 = node;
 
-	while (*n1 && *n2) {
+	while (n1 && n2) {
 
-		if (n1->next)
-			n1 = n1->next;
-		if (n1->next)
-			n1 = n1->next;
-		if (n2->next)
+		n1 = n1->next;
+		n2 = n2->next;
+		if (n2)
 			n2 = n2->next;
-		if (n1 == n2)
+		if (n1 && n2 && n1 == n2)
 			return 1;
-
 	}
+	return 0;
+}
+
+#include <stdlib.h>
+#include <stdio.h>
+Node* b(int v) {
+	Node* new = malloc(sizeof(Node));
+	new->value = v;
+	new->next = 0;
+	return new;
+}
+int main() {
+
+	Node* a = b(1);
+
+	a->next = b(2);
+	a->next->next = b(3);
+	a->next->next->next = b(4);
+	a->next->next->next->next = a;
+
+	printf("%d\n", is_looping(a));
+
+	Node* c = b(1);
+	c->next = b(2);
+	c->next->next = b(3);
+	c->next->next->next = b(4);
+
+	printf("%d\n", is_looping(c));
+	
 	return 0;
 }
 
