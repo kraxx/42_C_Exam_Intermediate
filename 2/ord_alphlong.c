@@ -1,6 +1,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int isAlpha(char c) {
+	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
+}
+
+int arrLen(char **arr) {
+	int ret = 0;
+	while (*arr++)
+		ret++;
+	return ret;
+}
+
+char toSmall(char c) {
+	if ('A' <= c && c <= 'Z')
+		return c + 32;
+	return c;
+}
+
 int stringLength(char *s) {
 	int ret = 0;
 	while (*s++)
@@ -15,25 +32,6 @@ char* stringDupe(char* src, int len) {
 		dst[i] = src[i];
 	dst[len] = 0;
 	return dst;
-}
-
-int isAlpha(char c) {
-	return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
-}
-
-int arrLen(char **arr) {
-	int ret = 0;
-	while (*arr) {
-		arr++;
-		ret++;
-	}
-	return ret;
-}
-
-char toSmall(char c) {
-	if ('A' <= c && c <= 'Z')
-		return c + 32;
-	return c;
 }
 
 int stringComp(char* a, char* b) {

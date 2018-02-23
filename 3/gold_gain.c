@@ -1,3 +1,17 @@
+int gold_gain(int** mine, int n) {
+    int max = 0;
+    for (int col = 1; col <= n; col++) {
+        for (int row = 0; row < n; row++) {
+            int a = 0, b = 0, c = 0;
+            if (row > 0)
+                a = mine[row-1][col-1];
+            b = mine[row][col-1];
+            if (row < n - 1)
+                c = mine[row+1][col-1];
+        }
+    }
+}
+
 /*
 GOLD_GAIN
 Assignment name  : gold_gain
