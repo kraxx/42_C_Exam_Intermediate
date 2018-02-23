@@ -1,22 +1,67 @@
-//will get back to this
-
 typedef struct s_node {
-	int value;
-	struct s_node* left;
-	struct s_node* right;
-} node;
+    int value;
+    struct s_node* left;
+    struct s_node* right;
+} Node;
 
-int recurse(node* root, int v) {
+#define MAX(a, b) (a > b ? a : b)
 
-	if (!root)
-		return 1;
+int recurse(Node* node, int parentVal, int depth) {
 
-	
+    if (!node)
+        return 0;
+
+    int current = 1;
+
+    if (node->value == parentVal + 1)
+        current = depth + 1;
+
+    return MAX(MAX(recurse(node->left, node->value, current), recurse(node->right, node->value, current)), current);
 }
 
-int longest_sequence(node* root) {
+int longest_sequence(Node* root) {
 
-	return recurse(root, root->value);
+	return recurse(root, 0, 0);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+Node* b(int v) {
+    Node* new = malloc(sizeof(Node));
+    new->value = v;
+    new->left = 0;
+    new->right = 0;
+    return new;
+}
+int main() {
+    Node* n = b(10);
+    n->left = b(5);
+    n->left->left = b(6);
+    n->left->left->left = b(7);
+    n->left->left->right = b(13);
+    n->left->right = b(9);
+    printf("%d\n", longest_sequence(n));
+
+    Node* m = b(5);
+    m->left = b(6);
+    m->right = b(4);
+    m->right->left = b(9);
+    m->right->left->left = b(3);
+    m->right->left->right = b(2);
+    m->right->right = b(3);
+    m->right->right->right = b(2);
+    printf("%d\n", longest_sequence(m));
+
+    Node* o = b(30);
+    o->left = b(15);
+    o->left->left = b(61);
+    o->right = b(41);
+    o->right->right = b(80);
+    printf("%d\n", longest_sequence(o));
+
+    printf("%d\n", longest_sequence(0));
+
+    return 0; 
 }
 
 /*
