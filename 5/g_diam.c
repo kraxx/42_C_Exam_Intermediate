@@ -1,3 +1,111 @@
+#include <stdio.h>
+
+#include <stdlib.h>
+#include <unistd.h>
+#define LIM 20
+
+typedef struct Node {
+	int v;
+	struct Node* next;
+} Node;
+
+typedef struct Stack {
+	Node* top;
+} Graph;
+
+int pop(Stack* stack) {
+	if stack->top == 0 {
+		return -1;
+	}
+	Node* retNode = stack->top;
+	stack->top = stack->top->next;
+	int ret = retNode->v;
+	free(retNode);
+	return ret;
+}
+
+void push(Stack* stack, int v) {
+	Node* new = malloc(sizeof(Node));
+	new->v = v;
+	new->next = stack->top;
+	stack->top = new;
+}
+
+int isEmpty(Stack* stack) {
+	if (stack->top)
+		return 0;
+	return 1;
+}
+
+int isNum(char c) {
+	return ('0' <= c && c <= '9');
+}
+
+int cheapAtoi(char** s) {
+	int ret = 0;
+	while (isNum(**s)) {
+		ret *= 10;
+		ret += **s - '0';
+		(*s)++;
+	}
+	if (**s != 0)
+		(*s)++;
+	return ret;
+}
+
+char* cheapItoa(int n, int* len) {
+	int tmp = n;
+	while (tmp > 0) {
+		tmp /= 10;
+		*len++;
+	}
+	char* ret = malloc(len + 2);
+	ret[len - 1] = '\n';
+	ret[len] = 0;
+	for (int i = len - 1; i >= 0; i--) {
+		ret[i] = (n % 10) + '0';
+		n /= 10;
+	}
+	return ret;
+}
+
+int longestPath(char[LIM][LIM] matrix) {
+
+}
+
+int main(int ac, char* av[]) {
+	if (ac != 2) { write(1, "\n", 1); return 0; }
+
+	char matrix[LIM][LIM] = {0};
+
+	char* s = av[1];
+	while (*s) {
+		int src = cheapAtoi(&s);
+		int dest = cheapAtoi(&s);
+		matrix[src][dest] = 1;
+		matrix[dest][src] = 1;
+	}
+
+	int len = 0;
+	char* ret = longestPath(matrix, &len);
+
+	write(1, ret, len);
+	write(1, "\n", 1);
+
+	/*
+    ** Print matrix
+	for (int i = 0; i < LIM; i++) {
+		for (int j = 0; j < LIM; j++) {
+			printf("%d ", matrix[i][j]);
+		}
+		printf("\n");
+	}
+	**
+	*/
+
+	return 0;
+}
+
 /*
 G_DIAM
 Assignment name  : g_diam
