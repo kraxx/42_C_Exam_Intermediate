@@ -1,7 +1,7 @@
 /*
 This method is incorrect and will fail edge cases where there are multiple answers AND the first string contains them in different order.
 eg. strings { "abc", "ba" "aab" }
-The result is "a", whereas the question asks for "b".
+The result is "b", whereas the question asks for "a".
 However, this method is simpler (does not require keeping track of stringlengths) and passes the current (2018-02-20) intermediate exam.
 */
 
