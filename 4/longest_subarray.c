@@ -1,3 +1,56 @@
+#include <stdlib.h>
+#include <string.h>
+
+int findIt(char* arr) {
+	
+	int i = 0, odds = 0, evens = 0, len = 0;
+
+	for (; i < strlen(arr); i++) {
+		if (arr[i] % 2)
+			odds++;
+		else
+			evens++;
+		len++;
+	}
+	i--;
+	while (odds != evens && i >= 0) {
+		if (arr[i] % 2)
+			odds--;
+		else
+			evens--;
+		i--;
+		len--;
+	}
+	return len;
+}
+
+char* longest_subarray(char* arr) {
+
+	int maxIdx = 0, maxLen = 0;
+
+	for (int i = 0; i < strlen(arr); i++) {
+		int len = findIt(arr + i);
+		if (maxLen < len) {
+			maxLen = len;
+			maxIdx = i;
+		}
+		if (maxLen > strlen(arr) / 2)
+			break;
+	}
+	char* ret = malloc(maxLen + 1);
+	for (int i = 0; i < maxLen; i++)
+		ret[i] = arr[i + maxIdx];
+	ret[maxLen] = 0;
+	return ret;
+}
+
+#include <stdio.h>
+int main(int ac, char* av[]) {
+	if (ac == 2)
+		printf("%s\n", longest_subarray(av[1]));
+	return 0;
+}
+
 /*
 LONGEST_SUBARRAY
 Assignment name  : longest_subarray
