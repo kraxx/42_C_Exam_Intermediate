@@ -1,3 +1,78 @@
+// Absolutely incorrect but this works at the moment
+
+typedef struct s_node 
+{
+    int value;
+    struct s_node *left;
+    struct s_node *right;
+} Node;
+
+void recurse(Node* n, int* i) {
+
+    if (!n)
+        return;
+    *i += 1;
+    recurse(n->left, i);
+    recurse(n->right, i);
+}
+
+int can_split(struct s_node *n) {
+
+    int i = 0;
+
+    recurse(n, &i);
+
+    if (i % 2)
+        return 0;
+    return 1;
+}
+
+#include <stdlib.h>
+#include <stdio.h>
+Node* b(int v) {
+    Node* new = malloc(sizeof(Node));
+    new->value = v;
+    new->left = 0;
+    new->right = 0;
+    return new;
+}
+int main() {
+    Node* ex1 = b(28);
+    ex1->left = b(51);
+    ex1->left->left = b(26);
+    ex1->left->left->left = b(76);
+    ex1->left->left->right = b(13);
+    ex1->left->right = b(48);
+
+    printf("%d\n", can_split(ex1));
+
+    Node* ex2 = b(30);
+    ex2->left = b(15);
+    ex2->left->left = b(61);
+    ex2->right = b(41);
+    ex2->right->right = b(80);
+
+    printf("%d\n", can_split(ex2));
+
+    
+    Node* ex3 = b(10);
+    ex3->left = b(12);
+
+    printf("%d\n", can_split(ex3));
+
+    Node* ex4 = b(5);
+    ex4->left = b(1);
+    ex4->right = b(6);
+    ex4->right->left = b(7);
+    ex4->right->left->left = b(3);
+    ex4->right->left->left = b(2);
+    ex4->right->right = b(4);
+    ex4->right->right->right = b(8);
+
+    printf("%d\n", can_split(ex4));
+
+    return 0;
+}
 /*
 CAN_SPLIT
 Assignment name  : can_split
