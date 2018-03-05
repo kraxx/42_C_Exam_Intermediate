@@ -8,12 +8,14 @@ void equation(int n) {
 					printf("A = %d, B = %d, C = %d\n", a, b, c);
 }
 
+/************
+  Test Main
+************/
 
 #include <stdlib.h>
 int main(int ac, char* av[]) {
-	if (ac == 2) {
+	if (ac == 2)
 		equation(atoi(av[1]));
-	}
 	return 0;
 }
 

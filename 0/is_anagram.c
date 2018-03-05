@@ -12,6 +12,10 @@ int is_anagram(char* a, char*b) {
 	return 1;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 int main() {
 	char* a = "abcdef";
@@ -33,6 +37,8 @@ int main() {
 	char* h = "aaaaaaaaaa";
 
 	printf("%d\n", is_anagram(g, h));
+
+	return 0;
 }
 
 /*

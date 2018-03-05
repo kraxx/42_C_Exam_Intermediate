@@ -11,9 +11,9 @@ void reverse_tree(struct s_node *root) {
 	root->right = tmp;
 
 	if (root->left)
-		reverse_tree(left);
+		reverse_tree(root->left);
 	if (root->right)
-		reverse_tree(right);
+		reverse_tree(root->right);
 }
 
 /*

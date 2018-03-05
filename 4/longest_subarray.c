@@ -44,6 +44,10 @@ char* longest_subarray(char* arr) {
 	return ret;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 int main(int ac, char* av[]) {
 	if (ac == 2)

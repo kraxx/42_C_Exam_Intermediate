@@ -29,13 +29,16 @@ int width_tree(Node* n) {
     return MAX(MAX(width_tree(n->left), width_tree(n->right)), l + r + 1);
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 #include <stdlib.h>
 Node* b(int v) {
     Node* new = malloc(sizeof(Node));
     new->value = v;
-    new->left = 0;
-    new->right = 0;
+    new->left = new->right = 0;
     return new;
 }
 int main() {
@@ -74,6 +77,16 @@ int main() {
     Node* c = b(10);
     c->right = b(12);
     printf("%d\n", width_tree(c));
+
+    Node *d = b(25);
+    d->left = b(33);
+    d->left->left = b(12);
+    d->left->right = b(9);
+    d->left->right->left = b(3);
+    printf("%d\n", width_tree(d));
+
+    Node *e = b(10);
+    printf("%d\n", width_tree(e));
 
     return 0;
 }

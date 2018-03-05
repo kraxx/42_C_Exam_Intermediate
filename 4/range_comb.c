@@ -74,6 +74,10 @@ int    **range_comb(int n) {
 	return ret;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 int main(int ac, char* av[]) {
 	if (ac != 2)

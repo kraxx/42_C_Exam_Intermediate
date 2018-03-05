@@ -25,6 +25,10 @@ void print_doublon(int *a, int na, int *b, int nb) {
 	printf("\n");
 }
 
+/************
+  Test Main
+************/
+
 int main() {
 
 	int a[] = {1, 2, 10, 15};

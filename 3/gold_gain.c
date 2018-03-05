@@ -1,5 +1,3 @@
-// Test main doesn't work with syntax of gold_gain parameter. Oh well
-
 #define MAX(a, b, c) (a > b && a > c ? a : b > c ? b : c)
 
 int gold_gain(int** mine, int n) {
@@ -22,29 +20,43 @@ int gold_gain(int** mine, int n) {
     return max;
 }
 
+/************
+  Test Main
+************/
+
+#include <stdlib.h>
 #include <stdio.h>
 int main() {
 
-    int a[3][3] = {
-        { 1, 0, 0 },
-        { 0, 3, 4 },
-        { 0, 0, 0 }
-    };
+    int** a = malloc(sizeof(int*) * 3);
+    int a1[3] = { 1, 0, 0 };
+    int a2[3] = { 0, 3, 4 };
+    int a3[3] = { 0, 0, 0 };
+    a[0] = a1;
+    a[1] = a2;
+    a[2] = a3;
+    printf("%d\n", gold_gain(a, 3));
     
-    int b[3][3] = {
-        { 1, 2, 3 },
-        { 3, 4, 8 },
-        { 9, 6, 7 }
-    };
+    int** b = malloc(sizeof(int*) * 3);
+    int b1[3] = { 1, 2, 3 };
+    int b2[3] = { 3, 4, 8 };
+    int b3[3] = { 9, 6, 7 };
+    b[0] = b1;
+    b[1] = b2;
+    b[2] = b3;
+    printf("%d\n", gold_gain(b, 3));
+    
+    int** c = malloc(sizeof(int*) * 4);
+    int c1[4] = { 1, 3, 1, 5 };
+    int c2[4] = { 2, 2, 4, 1 };
+    int c3[4] = { 5, 0, 2, 3 };
+    int c4[4] = { 0, 6, 1, 2 };
+    c[0] = c1;
+    c[1] = c2;
+    c[2] = c3;
+    c[3] = c4;
+    printf("%d\n", gold_gain(c, 4));
 
-    int c[4][4] = {
-        { 1, 3, 1, 5 },
-        { 2, 2, 4, 1 },
-        { 5, 0, 2, 3 },
-        { 0, 6, 1, 2 }
-    };
-
-    printf("%d\n%d\n%d\n", gold_gain(a, 3), gold_gain(b, 3), gold_gain(c, 4));
     return 0;
 }
 

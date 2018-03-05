@@ -12,12 +12,15 @@ int count_of_2(int n) {
 	return count;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 #include <stdlib.h>
 int main(int ac, char* av[]) {
-	if (ac == 2) {
+	if (ac == 2)
 		printf("%d\n", count_of_2(atoi(av[1])));
-	}
 	return 0;
 }
 

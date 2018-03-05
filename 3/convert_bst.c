@@ -44,13 +44,16 @@ Node* convert_bst(Node* bst) {
 	return left;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdlib.h>
 #include <stdio.h>
 Node* b(int v) {
 	Node* new = malloc(sizeof(Node));
 	new->value = v;
-	new->left = 0;
-	new->right = 0;
+	new->left = new->right = 0;
 	return new;
 }
 int main() {

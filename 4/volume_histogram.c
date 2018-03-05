@@ -20,6 +20,10 @@ int volume_histogram(int* histogram, int size) {
     return ret;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 int main() {
 

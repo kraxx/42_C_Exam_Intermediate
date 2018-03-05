@@ -4,6 +4,7 @@ typedef struct s_node {
 } Node;
 
 int is_looping(Node* node) {
+	
 	Node* n1 = node;
 	Node* n2 = node;
 
@@ -18,6 +19,10 @@ int is_looping(Node* node) {
 	}
 	return 0;
 }
+
+/************
+  Test Main
+************/
 
 #include <stdlib.h>
 #include <stdio.h>

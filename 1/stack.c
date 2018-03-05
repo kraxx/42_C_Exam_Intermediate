@@ -44,6 +44,10 @@ int isEmpty(struct s_stack *stack) {
 	return 0;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 int main() {
 
@@ -68,6 +72,8 @@ int main() {
 	printf("Popped: %s\n", pop(s));
 	printf("Popped: %s\n", pop(s));
 	printf("Empty? %d\n", isEmpty(s));
+
+	return 0;
 }
 
 /*

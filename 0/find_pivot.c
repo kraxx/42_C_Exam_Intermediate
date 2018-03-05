@@ -1,9 +1,9 @@
 int find_pivot(int* arr, int n) {
 	
 	int sum = 0;
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		sum += arr[i];
-	}
+
 	int tmp = 0;
 	for (int i = 0; i < n; i++) {
 		if (tmp == sum - tmp - arr[i])
@@ -13,29 +13,29 @@ int find_pivot(int* arr, int n) {
 	return -1;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdio.h>
 int main() {
 
 	int a[] = {1, 2, 3, 4, 0, 6};
-
 	printf("%d\n", find_pivot(a, 6));
 
 	int b[] = {-5, 10, 2, 5};
-
 	printf("%d\n", find_pivot(b, 4));
 
 	int c[] = {1, 100, 0, 0, 1};
-
 	printf("%d\n", find_pivot(c, 5));
 
 	int d[] = {7, 9, 8};
-
 	printf("%d\n", find_pivot(d, 3));
 
 	int e[] = {1, 2};
-
 	printf("%d\n", find_pivot(e, 2));
 
+	return 0;
 }
 
 /*

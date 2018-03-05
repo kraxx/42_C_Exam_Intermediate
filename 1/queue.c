@@ -10,7 +10,6 @@ typedef struct s_queue {
     struct s_node *last;
 } Queue;
 
-
 Queue* init(void) {
 	Queue* q = malloc(sizeof(Queue));
 	q->first = 0;
@@ -44,13 +43,44 @@ void* dequeue(struct s_queue *queue) {
 void* peek(struct s_queue *queue) {
 	if (!queue->first)
 		return 0;
-	return queue->content;
+	return queue->first->content;
 }
 
 int isEmpty(struct s_queue *queue) {
 	if (!queue->first)
 		return 1;
 	return 0;
+}
+
+/************
+  Test Main
+************/
+
+#include <stdio.h>
+int main() {
+
+	Queue* q = init();
+
+	printf("Empty? %d\n", isEmpty(q));
+	printf("Enqueueing 'Hello'\n");
+	enqueue(q, "Hello");
+	printf("Empty? %d\n", isEmpty(q));
+	printf("Peeking: %s\n", peek(q));
+	printf("Enqueueing 'World'\n");
+	enqueue(q, "World");
+	printf("Empty? %d\n", isEmpty(q));
+	printf("Peeking: %s\n", peek(q));
+	printf("Enqueueing ':)'\n");
+	enqueue(q, ":)");
+	printf("Empty? %d\n", isEmpty(q));
+	printf("Peeking: %s\n", peek(q));
+	printf("Dequeue: %s\n", dequeue(q));
+	printf("Dequeue: %s\n", dequeue(q));
+	printf("Dequeue: %s\n", dequeue(q));
+	printf("Dequeue: %s\n", dequeue(q));
+	printf("Empty? %d\n", isEmpty(q));
+
+	return 0;	
 }
 
 

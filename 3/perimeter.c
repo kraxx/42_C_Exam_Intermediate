@@ -44,12 +44,14 @@ void perimeter(Node* root) {
     printf("\n");
 }
 
+/************
+  Test Main
+************/
 #include <stdlib.h>
 Node* b(int v) {
     Node* new = malloc(sizeof(Node));
     new->value = v;
-    new->left = 0;
-    new->right = 0;
+    new->left = new->right = 0;
     return new;
 }
 int main() {

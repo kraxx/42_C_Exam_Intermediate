@@ -27,13 +27,16 @@ int can_split(struct s_node *n) {
     return 1;
 }
 
+/************
+  Test Main
+************/
+
 #include <stdlib.h>
 #include <stdio.h>
 Node* b(int v) {
     Node* new = malloc(sizeof(Node));
     new->value = v;
-    new->left = 0;
-    new->right = 0;
+    new->left = new->right = 0;
     return new;
 }
 int main() {
