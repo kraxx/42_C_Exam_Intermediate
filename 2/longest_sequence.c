@@ -21,7 +21,7 @@ int recurse(Node* node, int parentVal, int depth) {
 
 int longest_sequence(Node* root) {
 
-	return recurse(root, 0, 0);
+	return recurse(root, ~0u >> 1, 0);
 }
 
 /************
