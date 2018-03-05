@@ -1,3 +1,55 @@
+typedef struct s_node {
+    void *content;
+    struct s_node *next;
+} Node;
+
+void* intersection(Node* lst1, Node* lst2) {
+
+	while (lst1) {
+		Node* tmp = lst2;
+		while (tmp) {
+			if (lst1 == tmp)
+				return lst1;
+			tmp = tmp->next;
+		}
+		lst1 = lst1->next;
+	}
+	return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+Node* b(void* v) {
+	Node* new = malloc(sizeof(Node));
+	new->content = v;
+	new->next = 0;
+	return new;
+}
+int main() {
+	Node* a = b("a");
+	a->next = b("b");
+	a->next->next = b("c");
+	a->next->next->next = b("d");
+	a->next->next->next->next = b("e");
+	a->next->next->next->next->next = b("f");
+
+	Node* c = b("g");
+	c->next = b("h");
+	c->next->next = b("i");
+	c->next->next->next = b("j");
+	c->next->next->next->next = b("k");
+	c->next->next->next->next->next = b("l");
+
+	Node* ret = intersection(a, c);
+	printf("%s\n", ret ? ret->content : 0);
+
+	c->next->next = a->next->next->next;
+	ret = intersection(a, c);
+	printf("%s\n", ret ? ret->content : 0);
+
+	return 0;
+}
+
 /*
 INTERSECTION
 Assignment name  : intersection
