@@ -1,15 +1,51 @@
+// Test main doesn't work with syntax of gold_gain parameter. Oh well
+
+#define MAX(a, b, c) (a > b && a > c ? a : b > c ? b : c)
+
 int gold_gain(int** mine, int n) {
     int max = 0;
-    for (int col = 1; col <= n; col++) {
+    for (int col = 1; col < n; col++) {
         for (int row = 0; row < n; row++) {
             int a = 0, b = 0, c = 0;
             if (row > 0)
-                a = mine[row-1][col-1];
-            b = mine[row][col-1];
+                a = mine[row - 1][col - 1];
+            b = mine[row][col - 1];
             if (row < n - 1)
-                c = mine[row+1][col-1];
+                c = mine[row + 1][col - 1];
+            mine[row][col] += MAX(a, b, c);
+            if (col == n - 1) {
+                if (max < mine[row][col])
+                    max = mine[row][col];
+            }
         }
     }
+    return max;
+}
+
+#include <stdio.h>
+int main() {
+
+    int a[3][3] = {
+        { 1, 0, 0 },
+        { 0, 3, 4 },
+        { 0, 0, 0 }
+    };
+    
+    int b[3][3] = {
+        { 1, 2, 3 },
+        { 3, 4, 8 },
+        { 9, 6, 7 }
+    };
+
+    int c[4][4] = {
+        { 1, 3, 1, 5 },
+        { 2, 2, 4, 1 },
+        { 5, 0, 2, 3 },
+        { 0, 6, 1, 2 }
+    };
+
+    printf("%d\n%d\n%d\n", gold_gain(a, 3), gold_gain(b, 3), gold_gain(c, 4));
+    return 0;
 }
 
 /*
