@@ -1,5 +1,3 @@
-// Absolutely incorrect but this works at the moment
-
 typedef struct s_node 
 {
     int value;
@@ -7,24 +5,33 @@ typedef struct s_node
     struct s_node *right;
 } Node;
 
-void recurse(Node* n, int* i) {
+int count(Node* n) {
 
     if (!n)
-        return;
-    *i += 1;
-    recurse(n->left, i);
-    recurse(n->right, i);
+        return 0;
+    return count(n->left) + count(n->right) + 1;
+}
+
+int checkIt(Node* n, int* canSplit, int totalNodes) {
+
+    if (!n)
+        return 0;
+
+    int c = checkIt(n->left, canSplit, totalNodes) + checkIt(n->right, canSplit, totalNodes) + 1;
+    if (totalNodes - c == c)
+        *canSplit = 1;
+    return c;
 }
 
 int can_split(struct s_node *n) {
 
-    int i = 0;
-
-    recurse(n, &i);
-
-    if (i % 2)
+    int totalNodes = count(n);
+    if (totalNodes % 2)
         return 0;
-    return 1;
+
+    int canSplit = 0;
+    checkIt(n, &canSplit, totalNodes);
+    return canSplit;
 }
 
 /************
