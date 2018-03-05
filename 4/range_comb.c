@@ -1,4 +1,4 @@
-// Gnerates in the wrong order
+// Generates in the wrong order
 
 #include <stdlib.h>
 #include <string.h>
@@ -18,16 +18,23 @@ int findPerms(int n) {
 	return ret;
 }
 
-void permute(int* a, int l, int r, int n, int** ret, int* idx) {
-	if (l == r) {
-		memcpy(ret[*idx], a, sizeof(int) * n);
-		*idx+= 1;
-	} else {
-		for (int i = l; i <= r; i++) {
-			swap((a + l), (a + i));
-			permute(a, l + 1, r, n, ret, idx);
-			swap((a + l), (a + i));
+void permute(int** ret, int* t, int* idx, int n) {
+	while (1) {
+
+		memcpy(ret[*idx], t, sizeof(int) * n);
+		*idx += 1;
+
+		int i;
+		for (i = n - 2; i >= 0; --i)
+			if (t[i] < t[i + 1])
+				break;
+		if (i == -1) 
+			break;
+		else {
+			int ceilIndex = findCeil(t, t[i], i + 1, n - 1);
+			swap(t + i, t + ceilIndex);
 		}
+
 	}
 }
 
@@ -42,9 +49,37 @@ int    **range_comb(int n) {
 		template[i] = i;
 	}
 	int idx = 0;
-	permute(template, 0, n - 1, n, ret, &idx);
+	permute(ret, template, &idx, n);
 	return ret;
 }
+
+// void permute(int* a, int l, int r, int n, int** ret, int* idx) {
+// 	if (l == r) {
+// 		memcpy(ret[*idx], a, sizeof(int) * n);
+// 		*idx+= 1;
+// 	} else {
+// 		for (int i = l; i <= r; i++) {
+// 			swap((a + l), (a + i));
+// 			permute(a, l + 1, r, n, ret, idx);
+// 			swap((a + l), (a + i));
+// 		}
+// 	}
+// }
+
+// int    **range_comb(int n) {
+// 	int perms = findPerms(n);
+// 	int** ret = malloc(sizeof(int*) * perms);
+// 	for (int i = 0; i < perms; i++) {
+// 		ret[i] = malloc(sizeof(int) * n);
+// 	}
+// 	int* template = malloc(sizeof(int) * n);
+// 	for (int i = 0; i < n; i++) {
+// 		template[i] = i;
+// 	}
+// 	int idx = 0;
+// 	permute(template, 0, n - 1, n, ret, &idx);
+// 	return ret;
+// }
 
 #include <stdio.h>
 int main(int ac, char* av[]) {
