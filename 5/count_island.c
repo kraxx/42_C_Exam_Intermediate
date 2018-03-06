@@ -2,6 +2,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+int errorCheck(char buf[100000], int size, int width, int height) {
+
+	if (size / height != width) {
+		write(1, "\n", 1);
+		return 0;
+	}
+
+	for (int i = 0; i < size; i++) {
+		if (buf[i] != '.' && buf[i] != 'X' && buf[i] != '\n')
+			return 0;
+	}
+	
+	return 1;
+}
+
 void floodFill(char buf[100000], int size, int width, int height, int i, char replacer) {
 
 	buf[i] = replacer;
@@ -35,10 +50,9 @@ void countIsland(char* file) {
 		width++;
 
 	int height = size / width;
-	if (size / height != width) {
-		write(1, "\n", 1);
+
+	if (!errorCheck(buf, size, width, height))
 		return;
-	}
 
 	char replacer = '0';
 	for (int i = 0; i < size; i++) {
