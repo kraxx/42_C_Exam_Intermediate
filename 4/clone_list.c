@@ -8,7 +8,10 @@ typedef struct s_node {
 
 Node* clone_list(Node* node) {
 
-	Node* original = node;
+    if (!node)
+        return 0;
+
+    Node* original = node;
     Node* temp;
 
     // Clone list in-between original
