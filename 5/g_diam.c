@@ -11,7 +11,7 @@ typedef struct Node {
 
 typedef struct Stack {
 	Node* top;
-} Graph;
+} Stack;
 
 int pop(Stack* stack) {
 	if stack->top == 0 {
@@ -70,6 +70,35 @@ char* cheapItoa(int n, int* len) {
 }
 
 int longestPath(char[LIM][LIM] matrix) {
+
+	int visited[LIM] = {0};
+	int longest = 0;
+	Stack* s;
+
+	for (int i = 0; i < LIM; i++) {
+
+		int len = 0;
+
+		// Does this value exist
+		for (int j = 0; j < LIM; j++) {
+			if (matrix[i][j]) {
+				push(s, i);
+				break;
+			}
+		}
+		while (!isEmpty(s)) {
+			Node* node = pop(s);
+			visited[node->v] = 1;
+			for (int j = 0; j < LIM; j++) {
+				if (matrix[i][j]) {
+					push(s, i);
+				}
+			}
+		}
+
+
+
+	}
 
 }
 
