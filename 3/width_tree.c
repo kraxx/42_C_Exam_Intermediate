@@ -9,24 +9,17 @@ typedef struct s_node {
 int longest(Node* n) {
     if (!n)
         return 0;
-    return MAX(longest(n->left) + 1, longest(n->right) + 1);
+    return MAX(longest(n->left), longest(n->right)) + 1;
 }
 
 int width_tree(Node* n) {
 
     if (!n)
         return 0;
-    else if (!n->left && !n->right)
-        return 1;
 
-    int l = 0, r = 0;
+    int width = longest(n->left) + longest(n->right) + 1;
 
-    if (n->left)
-        l = longest(n->left);
-    if (n->right)
-        r = longest(n->right);
-
-    return MAX(MAX(width_tree(n->left), width_tree(n->right)), l + r + 1);
+    return MAX(MAX(width_tree(n->left), width_tree(n->right)), width);
 }
 
 /************
