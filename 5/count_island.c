@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int errorCheck(char buf[100000], int size, int width, int height) {
+#define LIM 100000
+
+int errorCheck(char buf[LIM], int size, int width, int height) {
 
 	if (size / height != width) {
 		write(1, "\n", 1);
@@ -17,7 +19,7 @@ int errorCheck(char buf[100000], int size, int width, int height) {
 	return 1;
 }
 
-void floodFill(char buf[100000], int size, int width, int height, int i, char replacer) {
+void floodFill(char buf[LIM], int size, int width, int height, int i, char replacer) {
 
 	buf[i] = replacer;
 
@@ -36,10 +38,10 @@ void floodFill(char buf[100000], int size, int width, int height, int i, char re
 
 void countIsland(char* file) {
 	
-	char buf[100000] = {0};
+	char buf[LIM] = {0};
 	int fd = open(file, O_RDONLY);
 
-	int size = read(fd, buf, 100000);
+	int size = read(fd, buf, LIM);
 	if (size < 0) {
 		write(1, "\n", 1);
 		return;
