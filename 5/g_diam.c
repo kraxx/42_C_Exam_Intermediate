@@ -56,14 +56,6 @@ void longestPath(char matrix[LIM][LIM], int path[LIM], int pos, int chain, int* 
 	path[pos] = 0;
 }
 
-int startLongestPath(char matrix[LIM][LIM], int pos) {
-
-	int longest = 0;
-	int path[LIM] = {0};
-	longestPath(matrix, path, pos, 1, &longest);
-	return longest;
-}
-
 int main(int ac, char* av[]) {
 
 	if (ac != 2) { write(1, "\n", 1); return 0; }
@@ -79,10 +71,9 @@ int main(int ac, char* av[]) {
 	}
 
 	int longest = 2;
+	int path[LIM] = {0};
 	for (int i = 0; i < LIM; i++) {
-		int len = startLongestPath(matrix, i);
-		if (longest < len)
-			longest = len;
+		longestPath(matrix, path, i, 1, &longest);
 	}
 
 	char* ret = cheapItoa(longest);
