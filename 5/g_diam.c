@@ -1,40 +1,13 @@
-#include <stdio.h>
-
 #include <stdlib.h>
 #include <unistd.h>
-#define LIM 20
 
-typedef struct Node {
-	int v;
-	struct Node* next;
-} Node;
+#define LIM 100
 
-typedef struct Stack {
-	Node* top;
-} Stack;
-
-int pop(Stack* stack) {
-	if stack->top == 0 {
-		return -1;
-	}
-	Node* retNode = stack->top;
-	stack->top = stack->top->next;
-	int ret = retNode->v;
-	free(retNode);
+int myStrLen(char* s) {
+	int ret = 0;
+	while (*s++)
+		ret++;
 	return ret;
-}
-
-void push(Stack* stack, int v) {
-	Node* new = malloc(sizeof(Node));
-	new->v = v;
-	new->next = stack->top;
-	stack->top = new;
-}
-
-int isEmpty(Stack* stack) {
-	if (stack->top)
-		return 0;
-	return 1;
 }
 
 int isNum(char c) {
@@ -53,11 +26,12 @@ int cheapAtoi(char** s) {
 	return ret;
 }
 
-char* cheapItoa(int n, int* len) {
+char* cheapItoa(int n) {
 	int tmp = n;
+	int len = 0;
 	while (tmp > 0) {
 		tmp /= 10;
-		*len++;
+		len++;
 	}
 	char* ret = malloc(len + 2);
 	ret[len - 1] = '\n';
@@ -69,40 +43,29 @@ char* cheapItoa(int n, int* len) {
 	return ret;
 }
 
-int longestPath(char[LIM][LIM] matrix) {
+void longestPath(char matrix[LIM][LIM], int path[LIM], int pos, int chain, int* longest) {
 
-	int visited[LIM] = {0};
-	int longest = 0;
-	Stack* s;
-
+	path[pos] = 1;
 	for (int i = 0; i < LIM; i++) {
-
-		int len = 0;
-
-		// Does this value exist
-		for (int j = 0; j < LIM; j++) {
-			if (matrix[i][j]) {
-				push(s, i);
-				break;
-			}
+		if (matrix[pos][i] && path[i] == 0) {
+			if (*longest < chain + 1)
+				*longest = chain + 1;
+			longestPath(matrix, path, i, chain + 1, longest);
 		}
-		while (!isEmpty(s)) {
-			Node* node = pop(s);
-			visited[node->v] = 1;
-			for (int j = 0; j < LIM; j++) {
-				if (matrix[i][j]) {
-					push(s, i);
-				}
-			}
-		}
-
-
-
 	}
+	path[pos] = 0;
+}
 
+int startLongestPath(char matrix[LIM][LIM], int pos) {
+
+	int longest = 0;
+	int path[LIM] = {0};
+	longestPath(matrix, path, pos, 1, &longest);
+	return longest;
 }
 
 int main(int ac, char* av[]) {
+
 	if (ac != 2) { write(1, "\n", 1); return 0; }
 
 	char matrix[LIM][LIM] = {0};
@@ -115,23 +78,16 @@ int main(int ac, char* av[]) {
 		matrix[dest][src] = 1;
 	}
 
-	int len = 0;
-	char* ret = longestPath(matrix, &len);
-
-	write(1, ret, len);
-	write(1, "\n", 1);
-
-	/*
-    ** Print matrix
+	int longest = 2;
 	for (int i = 0; i < LIM; i++) {
-		for (int j = 0; j < LIM; j++) {
-			printf("%d ", matrix[i][j]);
-		}
-		printf("\n");
+		int len = startLongestPath(matrix, i);
+		if (longest < len)
+			longest = len;
 	}
-	**
-	*/
 
+	char* ret = cheapItoa(longest);
+	write(1, ret, myStrLen(ret));
+	write(1, "\n", 1);
 	return 0;
 }
 

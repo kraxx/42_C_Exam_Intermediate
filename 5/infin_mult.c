@@ -9,6 +9,7 @@ int myStrLen(char* s) {
 }
 
 int main(int ac, char* av[]) {
+	
 	if (ac != 3)
 		return 0;
 
