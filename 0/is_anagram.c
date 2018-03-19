@@ -3,9 +3,9 @@ int is_anagram(char* a, char*b) {
 	int tab[126] = {0};
 
 	while (*a)
-		tab[*a++]++;
+		tab[(int)*a++]++;
 	while (*b)
-		tab[*b++]--;
+		tab[(int)*b++]--;
 	for (int i = 0; i < 126; i++)
 		if (tab[i] != 0)
 			return 0;

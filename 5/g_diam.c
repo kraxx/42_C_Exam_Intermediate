@@ -68,7 +68,7 @@ int main(int ac, char* av[]) {
 
 	if (ac != 2) { write(1, "\n", 1); return 0; }
 
-	char matrix[LIM][LIM] = {0};
+	char matrix[LIM][LIM] = {{0}};
 
 	char* s = av[1];
 	while (*s) {

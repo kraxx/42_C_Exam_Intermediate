@@ -59,7 +59,7 @@ int main(int ac, char* av[]) {
 		write(1, "\n", 1);
 		return 0;
 	}
-	char *arr[1000][1000] = {0};
+	char *arr[1000][1000] = {{0}};
 	char* s = av[1];
 	while (*s) {
 		int len = 0;

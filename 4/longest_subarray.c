@@ -5,7 +5,7 @@ int findIt(char* arr) {
 	
 	int i = 0, odds = 0, evens = 0, len = 0;
 
-	for (; i < strlen(arr); i++) {
+	for (; i < (int)strlen(arr); i++) {
 		if (arr[i] % 2)
 			odds++;
 		else
@@ -28,13 +28,13 @@ char* longest_subarray(char* arr) {
 
 	int maxIdx = 0, maxLen = 0;
 
-	for (int i = 0; i < strlen(arr); i++) {
+	for (int i = 0; i < (int)strlen(arr); i++) {
 		int len = findIt(arr + i);
 		if (maxLen < len) {
 			maxLen = len;
 			maxIdx = i;
 		}
-		if (maxLen > strlen(arr) / 2)
+		if (maxLen > (int)strlen(arr) / 2)
 			break;
 	}
 	char* ret = malloc(maxLen + 1);

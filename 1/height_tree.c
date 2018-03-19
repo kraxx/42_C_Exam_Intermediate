@@ -25,7 +25,7 @@ int height_tree(struct s_node *root) {
 #include <stdlib.h>
 #include <stdio.h>
 Node* b(int v) {
-    Node* new = malloc(sizeof(node));
+    Node* new = malloc(sizeof(Node));
     new->value = v;
     new->nodes = malloc(100000);
     return new;
